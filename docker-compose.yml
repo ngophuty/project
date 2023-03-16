@@ -1,0 +1,39 @@
+version: '3.8'
+
+volumes:
+  elastic_data:
+    driver: local
+
+networks:
+  appnet:
+
+services:
+  app:
+    image: app-python:unit-python-3.10
+    build:
+      context: ./_docker/app/build
+      dockerfile: Dockerfile
+      args:
+        USER_ID: ${USER_ID:-1000}
+    networks:
+      appnet:
+    working_dir: /src
+    ports:
+      - ${PORT:-8000}:8000
+    extra_hosts:
+      - "docker.host:host-gateway"
+    environment:
+      - UVICORN_AUTO_START=${UVICORN_AUTO_START}
+    volumes:
+      # Source folder
+      - ./:/src
+      # Scripts
+      - ./_docker/app/scripts/startup.sh:/startup.sh:ro
+      - ./_docker/app/scripts/entrypoint.sh:/entrypoint.sh:ro
+      # Supervisor
+      - ./_docker/app/supervisor:/etc/supervisor:ro
+      # Miscelaneous
+      - ./_docker/app/scripts/command.py:/usr/local/bin/cmd:ro
+      - ./_docker/app/scripts/pip-install.sh:/usr/local/bin/pip-install:ro
+      - ./_docker/bashrc.sh:/.bashrc
+    entrypoint: ["/entrypoint.sh"]

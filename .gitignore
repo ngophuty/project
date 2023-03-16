@@ -1,0 +1,31 @@
+# Ignore files and folders starting with '.'
+**/.*
+
+# Ignore local configuration
+
+# Ignore automatically generated files
+**/*.pyc
+dist/*
+webpack-stats.json
+
+# Ignore logs
+logs/*
+
+# Exclude data folder
+data/*
+_elastic/data/*
+_elastic/docs/*
+_elastic/docs.zip
+_notebooks/experiments/
+
+# Ignore node_modules folders
+**/node_modules
+
+# Excludes these from .gitignore
+!**/.vscode
+!**/.gitignore
+!**/.eslintrc
+!**/.eslintrc.js
+!**/.prettierrc
+!**/.prettierrc.js
+!**/.pylintrc

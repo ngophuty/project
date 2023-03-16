@@ -1,0 +1,92 @@
+{
+  "diffEditor.wordWrap": "off",
+  "editor.minimap.maxColumn": 168,
+  "editor.accessibilitySupport": "off",
+  "editor.wordWrapColumn": 168,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": true,
+  "files.eol": "\n",
+  "files.exclude": {
+    "**/.venv": true,
+    "**/.virtualenv": true,
+    "**/.vscode": true,
+    "**/.cache": true,
+    "**/node_modules": true,
+    "**/__pycache__": true,
+    "logs": true,
+    "dist": true,
+  },
+  "eslint.debug": true,
+  "vetur.validation.template": false,
+  "vetur.validation.script": false,
+  "vetur.validation.style": false,
+  "vetur.format.defaultFormatterOptions": {
+    "prettier": {
+      "bracketSameLine": true,
+      "bracketSpacing": true,
+      "htmlWhiteSpaceSensitivity": "ignore",
+      "jsxSingleQuote": false,
+      "printWidth": 168,
+      "quoteProps": "consistent",
+      "singleQuote": false,
+      "tabWidth": 2,
+      "trailingComma": "es5"
+    }
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "html.validate.scripts": false,
+  "html.format.wrapAttributes": "preserve-aligned",
+  "html.format.wrapLineLength": 168,
+  "[python]": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+  },
+  "python.languageServer": "Pylance",
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.analysis.logLevel": "Warning",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.pylintArgs": [
+    "--enable=W0614"
+  ],
+  "python.formatting.provider": "autopep8",
+  "python.formatting.autopep8Args": [
+    "--max-line-length",
+    "200",
+    "--aggressive"
+  ],
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "_env": ".env",
+    "_django": ".django",
+    "_docker": ".docker",
+    "docker-app.yml": "docker-services.yml",
+    "requirements.txt": "packages-app.txt, packages-node.txt",
+    "tsconfig.json": "tsconfig.*.json",
+    "vue.config.js": "postcss.config.js, tailwind.js, gettext.config.js, webpack-stats.json, .eslintrc.js, babel.config.js, package.json, package-lock.json, yarn.lock",
+  },
+  "python.envFile": "${workspaceFolder}/.vscode/.env",
+}
