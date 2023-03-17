@@ -14,3 +14,21 @@
     ```bash
     ./cmd docker up
     ```
+
+4. Serve frontend
+    ```bash
+    ./cmd node serve
+    ```
+
+
+5. Serve backend
+    ```bash
+    ./cmd app serve
+    ./cmd app start uvicorn
+    ```
+
+
+6. Manage supervisord
+    ```bash
+    ./cmd app status all
+    ```
