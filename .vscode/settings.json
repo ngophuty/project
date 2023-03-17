@@ -92,7 +92,7 @@
     "docker-app.yml": "docker-services.yml",
     "requirements.txt": "packages-app.txt, packages-node.txt",
     "tsconfig.json": "tsconfig.*.json",
-    "vue.config.js": "postcss.config.js, tailwind.js, gettext.config.js, webpack-stats.json, .eslintrc.js, babel.config.js, package.json, package-lock.json, yarn.lock",
+    "vue.config.js": ".eslintrc.js, babel.config.js, volar.config.js, jsconfig.json, package.json, package-lock.json, yarn.lock",
   },
   "python.envFile": "${workspaceFolder}/.vscode/.env",
 }
