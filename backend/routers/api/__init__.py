@@ -10,4 +10,5 @@ router = APIRouter(
     },
 )
 
+# pylint: disable=unused-import, wrong-import-position
 from .routes import index

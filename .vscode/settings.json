@@ -80,6 +80,7 @@
     "200",
     "--aggressive"
   ],
+  "python.linting.cwd": "${workspaceFolder}/backend",
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.ts": "${capture}.js",
