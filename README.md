@@ -1,3 +1,8 @@
+# Requirements
+
+- Docker
+- Eslint
+
 # Setup
 
 1. Init configuration
@@ -23,10 +28,10 @@
 
 5. Serve backend
     ```bash
+    ./cmd app install
     ./cmd app serve
     ./cmd app start uvicorn
     ```
-
 
 6. Manage supervisord
     ```bash

@@ -22,10 +22,10 @@ location / {
 }
 
 location ~ ^/(api|docs|openapi.json).* {
-    try_files $uri @app;
+    try_files $uri @backend;
 }
 
-location @app {
+location @backend {
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";

@@ -28,6 +28,8 @@ services:
     image: adminer:4.8.1-standalone
     networks:
       appnet:
+    ports:
+      - 7000:8080
     volumes:
         # Miscelaneous
         - ./_docker/bashrc.sh:/.bashrc
@@ -48,7 +50,7 @@ services:
       # Miscelaneous
       - ./_docker/bashrc.sh:/.bashrc
     command: ["sleep", "infinity"]
-  # Nginx / Nginx Unit / Python
+  # Nginx / Python
   app:
     image: app-python:unit-python-3.10
     build:

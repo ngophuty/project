@@ -17,6 +17,12 @@
     "dist": true,
   },
   "eslint.debug": true,
+  "eslint.workingDirectories": [
+    {"mode": "auto"}
+  ],
+  "eslint.options": {
+      "overrideConfigFile": ".eslintrc.js"
+  },
   "vetur.validation.template": false,
   "vetur.validation.script": false,
   "vetur.validation.style": false,

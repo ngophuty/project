@@ -9,4 +9,4 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 LOCAL_CONFIG = os.getenv("LOCAL_CONFIG", "config/.env")
 load_dotenv(os.path.join(BASE_DIR.parent, LOCAL_CONFIG))
 
-ELASTICSEARCH_URL = os.getenv('ELASTICSEARCH_URL', 'http://docker.host:9200')
+DB_NAME = os.getenv('DB_NAME', None)
