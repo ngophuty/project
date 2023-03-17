@@ -30,8 +30,8 @@ def docker_compose(*args, env=None):
 def getuid():
     return 0 if IS_ROOT else os.getuid()
 
-if APP not in ["yarn", "app", "node", "docker", "init"]:
-    subprocess_call("cat _documents/help_content.md", shell=True)
+if APP not in ["yarn", "app", "node", "docker", "init", "db"]:
+    print("Invalid command\n")
     sys.exit(0)
 
 if APP == "init":
@@ -77,3 +77,6 @@ if APP == "docker":
         docker_compose(COMMAND, env={"USER_ID" : str(os.getuid())})
     else:
         docker_compose(COMMAND, *ARGS)
+
+if APP == "db":
+    docker_compose("exec", "--user", getuid(), "app", "cmd", APP, COMMAND, *ARGS)
