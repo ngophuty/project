@@ -1,2 +1,5 @@
-PORT="8000"
-UVICORN_AUTO_START="false" # "false", "true"
+USER_ID="1000"
+DB_NAME="app"
+DB_USER="app"
+DB_PASSWORD="mydbpassword"
+DB_ROOT_PASSWORD="secret!!!"

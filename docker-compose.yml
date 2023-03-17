@@ -1,13 +1,54 @@
 version: '3.8'
 
 volumes:
-  elastic_data:
+  database:
     driver: local
 
 networks:
   appnet:
 
 services:
+  # Database
+  mysql:
+    image: mariadb:10.5-focal
+    networks:
+      appnet:
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+    volumes:
+        # Database data
+        - database:/var/lib/mysql
+        # Miscelaneous
+        - ./_docker/bashrc.sh:/.bashrc
+  # Database admin
+  adminer:
+    image: adminer:4.8.1-standalone
+    networks:
+      appnet:
+    volumes:
+        # Miscelaneous
+        - ./_docker/bashrc.sh:/.bashrc
+  # Node
+  node:
+    image: app-node:node-17
+    networks:
+      appnet:
+    build:
+      context: ./_docker/node/build
+      dockerfile: Dockerfile
+      args:
+        USER_ID: ${USER_ID:-1000}
+    working_dir: /src/frontend
+    volumes:
+      # Source folder
+      - ./:/src
+      # Miscelaneous
+      - ./_docker/bashrc.sh:/.bashrc
+    command: ["sleep", "infinity"]
+  # Nginx / Nginx Unit / Python
   app:
     image: app-python:unit-python-3.10
     build:
@@ -19,11 +60,9 @@ services:
       appnet:
     working_dir: /src
     ports:
-      - ${PORT:-8000}:8000
+      - ${PORT:-8000}:9000
     extra_hosts:
       - "docker.host:host-gateway"
-    environment:
-      - UVICORN_AUTO_START=${UVICORN_AUTO_START}
     volumes:
       # Source folder
       - ./:/src
@@ -32,6 +71,9 @@ services:
       - ./_docker/app/scripts/entrypoint.sh:/entrypoint.sh:ro
       # Supervisor
       - ./_docker/app/supervisor:/etc/supervisor:ro
+      # Nginx
+      - ./_docker/app/nginx/nginx.conf:/etc/nginx/sites-available/default:ro
+      - ./_docker/app/nginx/server.configs:/etc/nginx/conf.d/server.configs:ro
       # Miscelaneous
       - ./_docker/app/scripts/command.py:/usr/local/bin/cmd:ro
       - ./_docker/app/scripts/pip-install.sh:/usr/local/bin/pip-install:ro

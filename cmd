@@ -7,7 +7,7 @@ from subprocess import call as subprocess_call
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 IS_ROOT = os.getenv('root') is not None
 ARGS = sys.argv[1:]
-ENV_DOCKER = "config/.docker"
+ENV_DOCKER = os.path.join(ROOT_PATH, "config/.docker")
 PROJECT = os.path.basename(ROOT_PATH).lower()
 
 APP = ARGS[0] if len(ARGS) > 0 else None
@@ -49,12 +49,15 @@ if APP == "app":
     if COMMAND == "install":
         COMMAND = "pip-install"
 
-    if COMMAND in ["serve", "migrate", "makemigrations", "start", "stop", "restart", "status"]:
-        if COMMAND in ["serve", "migrate", "makemigrations", "start", "stop", "restart", "status"]:
+    if COMMAND in ["serve", "start", "stop", "restart", "status"]:
+        if COMMAND in ["serve", "start", "stop", "restart", "status"]:
             IS_ROOT = True
         docker_compose("exec", "--user", getuid(), "app", "cmd", COMMAND, *ARGS)
     else:
         docker_compose("exec", "--user", getuid(), "app", COMMAND, *ARGS)
+
+if APP in ["yarn", "node"]:
+    docker_compose("exec", "--user", getuid(), "node", "yarn", COMMAND, env={"USER_ID" : str(os.getuid())})
 
 if APP == "docker":
     if COMMAND == "up":
@@ -70,7 +73,7 @@ if APP == "docker":
             ARGS.remove("-f")
         ARGS.insert(0, '-f')
 
-    if COMMAND == "build":
+    if COMMAND in ["build", "rebuild"]:
         docker_compose(COMMAND, env={"USER_ID" : str(os.getuid())})
     else:
         docker_compose(COMMAND, *ARGS)
