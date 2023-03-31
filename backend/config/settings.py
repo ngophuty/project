@@ -1,17 +1,18 @@
-import os
-from pathlib import Path
-from dotenv import load_dotenv
+from typing import List, Optional
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+from pydantic import BaseSettings
 
-# Loading local configurations
-LOCAL_CONFIG = os.getenv("LOCAL_CONFIG", "config/.env")
-load_dotenv(os.path.join(BASE_DIR.parent, LOCAL_CONFIG))
+class FastApiSettings(BaseSettings):
 
-DB_HOST = os.getenv('DB_HOST', None)
-DB_NAME = os.getenv('DB_NAME', None)
-DB_USER = os.getenv('DB_USER', None)
-DB_PASSWORD = os.getenv('DB_PASSWORD', None)
+    FAPP_HOST: Optional[str] = "0.0.0.0"
+    FAPP_PORT: Optional[int] = 8000
+    FAPP_RELOAD: bool = False
 
-SQLALCHEMY_DATABASE_URL = f"mysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}"
+    FAPP_MIDDLEWARE_ENABLE_BurteMiddleware: bool = False
+    FAPP_MIDDLEWARE_ENABLE_CORSMiddleware: bool = True
+    FAPP_MIDDLEWARE_CORS_ALLOW_ORIGINS: List[str] = ["*"]
+    FAPP_MIDDLEWARE_CORS_ALLOW_METHODS: List[str] = ["*"]
+    FAPP_MIDDLEWARE_CORS_ALLOW_HEADERES: List[str] = ["*"]
+
+
+settings = FastApiSettings(_env_file=".env")

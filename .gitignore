@@ -2,6 +2,10 @@
 **/.*
 
 # Ignore local configuration
+venv
+env
+.env
+
 
 # Ignore automatically generated files
 **/*.pyc
