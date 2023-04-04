@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, BigInteger, TIMESTAMP, VARCHAR, Date
+from sqlalchemy import Column, Integer, DateTime, BigInteger, TIMESTAMP, VARCHAR, Date
 
 from database.connect_mysql import Base
 

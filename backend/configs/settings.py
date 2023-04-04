@@ -21,4 +21,4 @@ class FastApiSettings(BaseSettings):
     DB_PORT: Optional[str]
 
 
-settings = FastApiSettings(_env_file="../config/.env")
+settings = FastApiSettings(_env_file=".env")
